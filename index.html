@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เรื่องราวของเรา 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Itim', cursive;
+  background: linear-gradient(180deg,#ff7eb3,#ffd1e8);
+  color:white;
+}
+
+/* ===== IG STORY ===== */
+.story{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  box-sizing:border-box;
+}
+
+.slide{
+  max-width:360px;
+  width:100%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border-radius:30px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+h1,h2{
+  margin-top:0;
+}
+
+img{
+  width:100%;
+  border-radius:20px;
+  margin-top:15px;
+}
+
+/* ===== BUTTON ===== */
+button{
+  border:none;
+  padding:12px 20px;
+  border-radius:30px;
+  font-size:16px;
+  font-family:'Itim', cursive;
+  cursor:pointer;
+  margin-top:15px;
+}
+
+/* 🎵 Music Button */
+#musicBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#ff4f9a;
+  color:white;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  z-index:999;
+}
+
+/* 💌 Message */
+textarea{
+  width:100%;
+  height:120px;
+  border:none;
+  border-radius:15px;
+  padding:10px;
+  font-family:'Itim', cursive;
+  resize:none;
+}
+
+/* 🎁 Surprise */
+#surprise{
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 YouTube Music : Your Ever - COCKTAIL -->
+<!-- ถ้าอยากเปลี่ยนเพลง ให้เปลี่ยน VIDEO_ID -->
+<iframe
+  id="ytPlayer"
+  width="0"
+  height="0"
+  src="https://www.youtube.com/embed/3F9k0Y4wzVY?enablejsapi=1&loop=1&playlist=3F9k0Y4wzVY"
+  frameborder="0"
+  allow="autoplay">
+</iframe>
+
+<!-- 🎵 ปุ่มเปิดเพลง -->
+<button id="musicBtn" onclick="toggleYT()">🎵 เปิดเพลง Your Ever</button>
+
+<!-- Slide 1 -->
+<div class="story">
+  <div class="slide">
+    <h1>💖 เรื่องราวของเรา 💖</h1>
+    <p>จากวันแรก…จนถึงวันนี้</p>
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
+  </div>
+</div>
+
+<!-- Slide 2 -->
+<div class="story">
+  <div class="slide">
+    <h2>🌷 จุดเริ่มต้น</h2>
+    <p>
+      เราเริ่มทักจีบกันเมื่อ<br>
+      <b>20 กันยายน 2567</b><br>
+      จากคนแปลกหน้า กลายเป็นคนพิเศษ
+    </p>
+  </div>
+</div>
+
+<!-- Slide 3 -->
+<div class="story">
+  <div class="slide">
+    <h2>💔 ระหว่างทาง</h2>
+    <p>
+      มีคุยบ้าง เลิกบ้าง<br>
+      แต่หัวใจไม่เคยหายไปไหน
+    </p>
+  </div>
+</div>
+
+<!-- Slide 4 -->
+<div class="story">
+  <div class="slide">
+    <h2>💞 การกลับมา</h2>
+    <p>
+      วันที่ <b>12 ตุลาคม 2568</b><br>
+      เราเลือกกลับมาจับมือกันอีกครั้ง
+    </p>
+  </div>
+</div>
+
+<!-- Slide 5 -->
+<div class="story">
+  <div class="slide">
+    <h2>📅 ปัจจุบัน</h2>
+    <p>
+      <b>31 ธันวาคม 2568</b><br>
+      เรายังอยู่ด้วยกัน และเลือกกันทุกวัน 💕
+    </p>
+  </div>
+</div>
+
+<!-- 💌 Message -->
+<div class="story">
+  <div class="slide">
+    <h2>💌 ข้อความถึงเธอ</h2>
+    <textarea placeholder="รักออมมากๆเลย ขอบคุณที่ซัพพอตย์ด้วยกันเสมอมา พี่อยากอยู๋ด้วยกัน และดูการพัฒนาในอนาคตไปด้วยกัน พี่ไม่แยกจากกันอีกแล้ว"></textarea>
+  </div>
+</div>
+
+<!-- 🎁 Surprise -->
+<div class="story">
+  <div class="slide">
+    <h2>🎁 มีอะไรจะบอก</h2>
+    <button onclick="showSurprise()">กดดูเซอร์ไพรส์ 💖</button>
+    <div id="surprise">
+      <p style="margin-top:20px;">
+        เป็นแฟนกับพี่นะ 💕<br>
+        ขอบคุณที่ไม่เคยปล่อยมือกัน<br>
+        อยู่ด้วยกันไปนานๆ นะ
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+let ytPlaying = false;
+const yt = document.getElementById("ytPlayer");
+const btn = document.getElementById("musicBtn");
+
+function toggleYT(){
+  if(!ytPlaying){
+    yt.contentWindow.postMessage(
+      '{"event":"command","func":"playVideo","args":""}',
+      '*'
+    );
+    btn.innerHTML = "⏸️ ปิดเพลง";
+    ytPlaying = true;
+  }else{
+    yt.contentWindow.postMessage(
+      '{"event":"command","func":"pauseVideo","args":""}',
+      '*'
+    );
+    btn.innerHTML = "🎵 เปิดเพลง Your Ever";
+    ytPlaying = false;
+  }
+}
+
+function showSurprise(){
+  document.getElementById("surprise").style.display = "block";
+}
+</script>
+
+</body>
+</html>
